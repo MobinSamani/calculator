@@ -68,7 +68,7 @@ const h = (e, t) => {
     },
     addOperation(e) {
       var t;
-      if (!((t = this.value2) != null && t.length))
+      if (!((t = this.value2) != null && t.length) || this.value2 === "0")
         return this.replaceOperation(e);
       this.calculated ? (this.value1 = `${this.value2} ${e} `, this.calculated = !1) : (this.calculate(), this.value1 += `${this.value2} ${e} `), this.value2 = "0", this.lastOperation = e;
     },
