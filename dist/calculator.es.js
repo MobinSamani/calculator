@@ -70,7 +70,7 @@ const h = (e, t) => {
       var t;
       if (!((t = this.value2) != null && t.length))
         return this.replaceOperation(e);
-      this.calculated ? (this.value1 = `${this.value2} ${e} `, this.calculated = !1) : (this.calculate(), this.value1 += `${this.value2} ${e} `), this.value2 = "", this.lastOperation = e;
+      this.calculated ? (this.value1 = `${this.value2} ${e} `, this.calculated = !1) : (this.calculate(), this.value1 += `${this.value2} ${e} `), this.value2 = "0", this.lastOperation = e;
     },
     replaceOperation(e) {
       var t;
@@ -101,7 +101,7 @@ const h = (e, t) => {
       !((e = this.value2) != null && e.length) || this.calculated || (this.value2 = this.value2.slice(0, -1));
     },
     clear() {
-      this.value1 = "", this.value2 = "", this.result = null, this.lastOperation = null, this.calculated = !1;
+      this.value1 = "", this.value2 = "0", this.result = null, this.lastOperation = null, this.calculated = !1;
     }
   }
 }, x = { class: "flex flex-col gap-y-8" }, w = { class: "h-20 rounded-3xl shadow-inner bg-gray-100 py-3.5 px-6" }, g = { class: "flex flex-col items-end justify-between w-full h-full overflow-hidden" }, b = { class: "text-sm text-gray-500 whitespace-nowrap" }, k = { class: "text-3xl whitespace-nowrap" }, y = {

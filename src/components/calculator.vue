@@ -106,7 +106,7 @@ export default {
         this.calculate();
         this.value1 += `${this.value2} ${key} `;
       }
-      this.value2 = "";
+      this.value2 = "0";
       this.lastOperation = key;
     },
     replaceOperation(key) {
@@ -146,7 +146,7 @@ export default {
     },
     clear() {
       this.value1 = "";
-      this.value2 = "";
+      this.value2 = "0";
       this.result = null;
       this.lastOperation = null;
       this.calculated = false;
