@@ -97,7 +97,7 @@ export default {
       else this.value2 += key;
     },
     addOperation(key) {
-      if (!this.value2?.length) return this.replaceOperation(key);
+      if (!this.value2?.length || this.value2 === "0") return this.replaceOperation(key);
 
       if (this.calculated) {
         this.value1 = `${this.value2} ${key} `;
