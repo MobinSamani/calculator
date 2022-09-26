@@ -16,7 +16,7 @@
       <button
         v-for="button in buttons"
         :key="button"
-        class="rounded-full shadow-md aspect-square flex items-center justify-center text-3xl hover:bg-gray-900 hover:text-white duration-150"
+        class="rounded-full shadow-md aspect-square flex items-center justify-center text-xl md:text-2xl lg:text-3xl hover:bg-gray-900 hover:text-white duration-150"
         @click="handleClick(button)"
       >
         {{ button }}

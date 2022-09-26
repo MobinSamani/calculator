@@ -119,7 +119,7 @@ function C(e, t, r, n, a, u) {
     a.buttons && a.buttons.length ? (i(), c("div", y, [
       (i(!0), c(d, null, p(a.buttons, (l) => (i(), c("button", {
         key: l,
-        class: "rounded-full shadow-md aspect-square flex items-center justify-center text-3xl hover:bg-gray-900 hover:text-white duration-150",
+        class: "rounded-full shadow-md aspect-square flex items-center justify-center text-xl md:text-2xl lg:text-3xl hover:bg-gray-900 hover:text-white duration-150",
         onClick: (V) => u.handleClick(l)
       }, o(l), 9, $))), 128))
     ])) : v("", !0)
