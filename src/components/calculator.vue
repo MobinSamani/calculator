@@ -7,7 +7,8 @@
         </div>
 
         <div class="text-3xl whitespace-nowrap">
-          {{ value2 }}
+          <template v-if="isNaN(value2)">{{ value2 }}</template>
+          <template v-else>{{ parseFloat(value2).toLocaleString() }}</template>
         </div>
       </div>
     </div>
@@ -16,7 +17,7 @@
       <button
         v-for="button in buttons"
         :key="button"
-        class="rounded-full shadow-md aspect-square flex items-center justify-center text-xl md:text-2xl lg:text-3xl hover:bg-gray-900 hover:text-white duration-150"
+        class="rounded-full shadow-md aspect-square flex items-center justify-center text-xl md:text-2xl lg:text-3xl hover:bg-gray-900 hover:text-white focus:bg-inherit focus:text-inherit active:bg-inherit active:text-inherit duration-150"
         @click="handleClick(button)"
       >
         {{ button }}
@@ -97,17 +98,22 @@ export default {
       else this.value2 += key;
     },
     addOperation(key) {
-      if (!this.value2?.length || this.value2 === "0") return this.replaceOperation(key);
+      const lastChar = this.getLastChar();
+      if ((!this.value2?.length || this.value2 === "0") && this.operations.includes(lastChar)) return this.replaceOperation(key);
 
       if (this.calculated) {
-        this.value1 = `${this.value2} ${key} `;
+        this.value1 = `${parseFloat(this.value2).toLocaleString()} ${key} `;
         this.calculated = false;
       } else {
         this.calculate();
-        this.value1 += `${this.value2} ${key} `;
+        this.value1 += `${parseFloat(this.value2).toLocaleString()} ${key} `;
       }
       this.value2 = "0";
       this.lastOperation = key;
+    },
+    getLastChar() {
+      const splitted = this.value1?.trim()?.split("");
+      return splitted?.[splitted?.length - 1];
     },
     replaceOperation(key) {
       if (!this.value1?.length) return;
@@ -136,13 +142,14 @@ export default {
 
       this.calculate();
 
-      this.value1 += this.value2;
+      this.value1 += parseFloat(this.value2).toLocaleString();
       this.value2 = String(this.result);
       this.calculated = true;
     },
     backspace() {
       if (!this.value2?.length || this.calculated) return;
       this.value2 = this.value2.slice(0, -1);
+      if (!this.value2?.length) this.value2 = "0";
     },
     clear() {
       this.value1 = "";
