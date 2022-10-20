@@ -12,7 +12,7 @@ const p = (e, t) => {
       value2: "0",
       result: null,
       buttons: ["C", "BS", "%", "/", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "0", "00", ".", "="],
-      operations: ["%", "/", "x", "-", "+"],
+      operations: ["/", "x", "-", "+"],
       lastOperation: null,
       calculated: !1
     };
@@ -48,8 +48,10 @@ const p = (e, t) => {
         case "+":
         case "-":
         case "/":
-        case "%":
           this.addOperation(e);
+          break;
+        case "%":
+          this.percent();
           break;
         case "=":
           this.equal();
@@ -73,6 +75,9 @@ const p = (e, t) => {
         return this.replaceOperation(e);
       this.calculated ? (this.value1 = `${parseFloat(this.value2).toLocaleString()} ${e} `, this.calculated = !1) : (this.calculate(), this.value1 += `${parseFloat(this.value2).toLocaleString()} ${e} `), this.value2 = "0", this.lastOperation = e;
     },
+    percent() {
+      this.value2 = String(this.value2 / 100), this.equal();
+    },
     getLastChar() {
       var t, s;
       const e = (s = (t = this.value1) == null ? void 0 : t.trim()) == null ? void 0 : s.split("");
@@ -94,8 +99,6 @@ const p = (e, t) => {
           return this.result = parseFloat(this.result) - parseFloat(this.value2);
         case "/":
           return this.result = parseFloat(this.result) / parseFloat(this.value2);
-        case "%":
-          return this.result = parseFloat(this.result) % parseFloat(this.value2);
       }
     },
     equal() {
@@ -137,10 +140,10 @@ function $(e, t, s, o, a, h) {
     ])) : f("", !0)
   ]);
 }
-const O = /* @__PURE__ */ p(g, [["render", $]]), S = {
+const S = /* @__PURE__ */ p(g, [["render", $]]), O = {
   name: "App",
   components: {
-    Calculator: O
+    Calculator: S
   }
 }, L = { class: "min-h-screen bg-gray-100 flex items-center justify-center p-8" }, E = { class: "flex flex-col gap-y-8 w-full sm:w-2/3 md:w-1/2 lg:w-1/3 2xl:w-1/4" }, B = /* @__PURE__ */ l("div", { class: "flex items-center justify-center gap-2 flex-wrap text-center" }, [
   /* @__PURE__ */ l("div", { class: "text-gray-600" }, "A Vue Calculator Application by"),
@@ -161,7 +164,7 @@ function V(e, t, s, o, a, h) {
     ])
   ]);
 }
-const q = /* @__PURE__ */ p(S, [["render", V]]);
+const A = /* @__PURE__ */ p(O, [["render", V]]);
 export {
-  q as default
+  A as default
 };
