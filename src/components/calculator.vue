@@ -35,7 +35,7 @@ export default {
       value2: "0",
       result: null,
       buttons: ["C", "BS", "%", "/", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "0", "00", ".", "="],
-      operations: ["%", "/", "x", "-", "+"],
+      operations: ["/", "x", "-", "+"],
       lastOperation: null,
       calculated: false
     };
@@ -77,8 +77,10 @@ export default {
         case "+":
         case "-":
         case "/":
-        case "%":
           this.addOperation(key);
+          break;
+        case "%":
+          this.percent();
           break;
         case "=":
           this.equal();
@@ -111,6 +113,10 @@ export default {
       this.value2 = "0";
       this.lastOperation = key;
     },
+    percent() {
+      this.value2 = String(this.value2 / 100);
+      this.equal();
+    },
     getLastChar() {
       const splitted = this.value1?.trim()?.split("");
       return splitted?.[splitted?.length - 1];
@@ -133,8 +139,6 @@ export default {
           return (this.result = parseFloat(this.result) - parseFloat(this.value2));
         case "/":
           return (this.result = parseFloat(this.result) / parseFloat(this.value2));
-        case "%":
-          return (this.result = parseFloat(this.result) % parseFloat(this.value2));
       }
     },
     equal() {
